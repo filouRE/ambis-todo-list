@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .content {
+    @apply flex justify-center items-center flex-col gap-3 min-h-[80vh];
+  }
+  .title {
+    @apply flex justify-center text-3xl gap-2;
+  }
+  .title img {
+    @apply w-4;
+  }
+  .new-item {
+    @apply flex justify-end items-end gap-2 text-lg font-bold;
+  }
+  .new-item img {
+    @apply w-6;
+  }
+  .element {
+    @apply flex flex-row gap-3;
+  }
+  .element img {
+    @apply w-7;
+  }
+  .icons {
+    @apply flex items-center flex-row gap-2;
+  }
+  .icons img:nth-child(1) {
+    @apply w-6;
+  }
+  .icons img:nth-child(2) {
+    @apply w-5;
+  }
+  img {
+    @apply cursor-pointer;
+  }
+}

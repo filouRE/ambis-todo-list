@@ -1,3 +1,5 @@
+// Linking
+import "./app.css";
 // Imports
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -7,6 +9,7 @@ import CheckIcon from "./assets/Check.svg";
 import UncheckIcon from "./assets/Uncheck.svg";
 import ChangeIcon from "./assets/Change.svg";
 import DeleteIcon from "./assets/Delete.svg";
+import AddIcon from "./assets/Add.svg";
 
 function App() {
   return (
@@ -14,11 +17,16 @@ function App() {
       <Header>
         <a href="#">CONTACT</a>
       </Header>
-      <div className="title">
-        <h1 className="text-">Things todo today</h1>
-        <img src={ModifyIcon} alt="modify icon" />
-      </div>
-      <div className="content ">
+
+      <div className="content">
+        <div className="title">
+          <h1 className="text-center font-bold ">Things todo today</h1>
+          <img src={ModifyIcon} alt="modify icon" />
+        </div>
+        <div className="new-item">
+          <p>Add a new item</p>
+          <img src={AddIcon} alt="check icon" />
+        </div>
         <div className="element">
           <img src={CheckIcon} alt="check icon" />
           <p>Start learning Vue.js</p>
@@ -29,7 +37,7 @@ function App() {
         </div>
         <div className="element">
           <img src={UncheckIcon} alt="check icon" />
-          <p>Start learning Vue.js</p>
+          <p className="line-through">Start learning Vue.js</p>
           <div className="icons">
             <img src={ChangeIcon} alt="change icon" />
             <img src={DeleteIcon} alt="delete icon" />
