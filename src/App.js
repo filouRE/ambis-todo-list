@@ -15,7 +15,7 @@ function App() {
         <a href="#">CONTACT</a>
       </Header>
       <div className="title">
-        <h1 className="text">Things todo today</h1>
+        <h1 className="text-">Things todo today</h1>
         <img src={ModifyIcon} alt="modify icon" />
       </div>
       <div className="content ">
