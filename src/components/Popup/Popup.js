@@ -2,7 +2,7 @@
 import "./style.css";
 import React, { useRef } from "react";
 
-function Popup(props) {
+export default function Popup(props) {
   const inputRef = useRef();
 
   const onAdd = () => {
@@ -53,5 +53,3 @@ function Popup(props) {
     ""
   );
 }
-
-export default Popup;
