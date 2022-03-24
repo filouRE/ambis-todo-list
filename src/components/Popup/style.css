@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .popup {
+    @apply flex justify-center items-center flex-col min-h-[92vh] min-w-full bg-slate-800/5 fixed z-50 pb-6;
+  }
+  .popup-inner {
+    @apply flex justify-center items-center flex-col text-center gap-4 py-10 px-4 min-w-[22rem] rounded	bg-white;
+  }
+  .buttons {
+    @apply flex justify-between gap-3;
+  }
+  .popup-inner .close-button {
+    @apply rounded py-1.5 bg-slate-900 text-white px-12;
+  }
+  .popup-inner .add-button {
+    @apply rounded py-1.5 bg-slate-900 text-white px-12;
+  }
+}

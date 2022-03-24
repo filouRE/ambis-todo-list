@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.element {
+  @apply flex flex-row gap-3;
+}
+.element img {
+  @apply w-7;
+}
+.icons {
+  @apply flex items-center flex-row gap-2;
+}
+.icons img:nth-child(1) {
+  @apply w-6;
+}
+.icons img:nth-child(2) {
+  @apply w-5;
+}

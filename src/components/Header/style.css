@@ -4,12 +4,12 @@
 
 @layer components {
   .header {
-    @apply w-full flex justify-between items-center px-8 pt-4 min-h-[8vh];
+    @apply w-full flex justify-between items-center px-8 py-4 h-[8vh];
   }
   .header p {
     @apply text-xl;
   }
   .header img {
-    @apply w-8;
+    @apply w-7;
   }
 }

@@ -23,3 +23,7 @@ img {
   -o-user-drag: none;
   user-select: none;
 }
+
+input[type="text"] {
+  font-size: 13px;
+}

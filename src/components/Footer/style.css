@@ -4,6 +4,6 @@
 
 @layer components {
   .footer {
-    @apply w-full flex flex-col justify-end  text-xs text-center min-h-[10vh];
+    @apply w-full flex flex-col justify-end  text-sm text-center min-h-[10vh];
   }
 }

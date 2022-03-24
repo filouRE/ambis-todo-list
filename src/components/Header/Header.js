@@ -9,7 +9,7 @@ export default memo(function Header({ children }) {
 
   return (
     <>
-      <header className="header">
+      <header className="header z-50">
         <p>Ambi's todo list</p>
         {mobile ? <img alt="burger" src={Burger} /> : <nav>{children}</nav>}
       </header>

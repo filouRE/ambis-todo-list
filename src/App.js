@@ -1,48 +1,90 @@
 // Linking
-import "./app.css";
+import "./App.css";
 // Imports
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Popup from "./components/Popup/Popup";
 // Images
-import ModifyIcon from "./assets/Modify.svg";
-import CheckIcon from "./assets/Check.svg";
-import UncheckIcon from "./assets/Uncheck.svg";
-import ChangeIcon from "./assets/Change.svg";
-import DeleteIcon from "./assets/Delete.svg";
 import AddIcon from "./assets/Add.svg";
+import Todos from "./components/Todos/Todos";
+import Title from "./components/Title/Title";
 
 function App() {
+  const [buttonPopup, setButtonPupop] = useState(false);
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
+
+  const titleRef = useRef();
+  const newItemRef = useRef();
+
+  if (!localStorage.getItem("todos")) {
+    localStorage.setItem("todos", JSON.stringify([]));
+  }
+
+  const pushTodos = (newTodo) => {
+    localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
+    setTodos([...todos, newTodo]);
+  };
+
+  const onDelete = (id) => {
+    const filteredTodos = todos.filter((x) => x.title !== id);
+    localStorage.setItem("todos", JSON.stringify([...filteredTodos]));
+    setTodos(filteredTodos);
+  };
+
+  useEffect(() => {
+    // localStorage.getItem("todos");
+
+    const speed = 1.2;
+    gsap.from(titleRef.current, {
+      y: -30,
+      duration: speed,
+      scale: 1,
+      ease: "elastic",
+      opacity: 0.6,
+    });
+    gsap.from(newItemRef.current, {
+      x: -40,
+      duration: speed,
+      scale: 1,
+      ease: "elastic",
+    });
+  }, []);
+
   return (
     <>
       <Header>
-        <a href="#">CONTACT</a>
+        <a href="mailto:felix@seku.tech" className="font-medium">
+          CONTACT
+        </a>
       </Header>
-
-      <div className="content">
-        <div className="title">
-          <h1 className="text-center font-bold ">Things todo today</h1>
-          <img src={ModifyIcon} alt="modify icon" />
-        </div>
-        <div className="new-item">
+      <Popup
+        trigger={buttonPopup}
+        setTrigger={setButtonPupop}
+        pushTodos={pushTodos}
+      >
+        <h3>Create a new task</h3>
+        <p>Enter the name of the tasks please!</p>
+      </Popup>
+      <div className="content" ref={titleRef}>
+        <Title />
+        <div
+          ref={newItemRef}
+          className="new-item cursor-pointer"
+          onClick={() => {
+            setButtonPupop(true);
+            document
+              .getElementsByClassName("content")[0]
+              .classList.add("blur-sm");
+          }}
+        >
           <p>Add a new item</p>
           <img src={AddIcon} alt="check icon" />
         </div>
-        <div className="element">
-          <img src={CheckIcon} alt="check icon" />
-          <p>Start learning Vue.js</p>
-          <div className="icons">
-            <img src={ChangeIcon} alt="change icon" />
-            <img src={DeleteIcon} alt="delete icon" />
-          </div>
-        </div>
-        <div className="element">
-          <img src={UncheckIcon} alt="check icon" />
-          <p className="line-through">Start learning Vue.js</p>
-          <div className="icons">
-            <img src={ChangeIcon} alt="change icon" />
-            <img src={DeleteIcon} alt="delete icon" />
-          </div>
-        </div>
+        {todos.map((todo) => (
+          <Todos key={todo.id} title={todo.title} delete={onDelete} />
+        ))}
       </div>
       <Footer />
     </>
