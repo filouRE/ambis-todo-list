@@ -5,14 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Popup from "./components/Popup/Popup";
+import { Popup, PopupTitle } from "./components/Popups/Popups";
 // Images
 import AddIcon from "./assets/Add.svg";
 import Todos from "./components/Todos/Todos";
-import Title from "./components/Title/Title";
+import ModifyIcon from "./assets/Modify.svg";
 
 function App() {
   const [buttonPopup, setButtonPupop] = useState(false);
+  const [buttonPopupTitle, setButtonPupopTitle] = useState(false);
+
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
 
   const titleRef = useRef();
@@ -59,24 +61,31 @@ function App() {
           CONTACT
         </a>
       </Header>
-      <Popup
-        trigger={buttonPopup}
-        setTrigger={setButtonPupop}
-        pushTodos={pushTodos}
-      >
+      <PopupTitle trigger={buttonPopupTitle} setTrigger={setButtonPupopTitle} />
+
+      <Popup trigger={buttonPopup} setTrigger={setButtonPupop} pushTodos={pushTodos}>
         <h3>Create a new task</h3>
         <p>Enter the name of the tasks please!</p>
       </Popup>
       <div className="content" ref={titleRef}>
-        <Title />
+        <div className="title flex justify-center text-3xl gap-2">
+          <h1 className="text-center font-bold ">Things todo today</h1>
+          <img
+            src={ModifyIcon}
+            alt="modify icon"
+            className="w-4"
+            onClick={() => {
+              setButtonPupopTitle(true);
+              document.getElementsByClassName("content")[0].classList.add("blur-sm");
+            }}
+          />
+        </div>
         <div
           ref={newItemRef}
           className="new-item cursor-pointer"
           onClick={() => {
             setButtonPupop(true);
-            document
-              .getElementsByClassName("content")[0]
-              .classList.add("blur-sm");
+            document.getElementsByClassName("content")[0].classList.add("blur-sm");
           }}
         >
           <p>Add a new item</p>

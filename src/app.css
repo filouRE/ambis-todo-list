@@ -7,7 +7,7 @@
     @apply flex justify-center items-center flex-col gap-3 min-h-[80vh];
   }
   .new-item {
-    @apply flex gap-2 text-lg font-bold;
+    @apply flex gap-2 text-lg font-bold bg-blue-500 p-2 rounded-md text-white;
   }
   .new-item img {
     @apply w-6;

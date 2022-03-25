@@ -14,7 +14,7 @@ function Todos(props) {
     <>
       <div className="element">
         <img src={CheckIcon} alt="check icon" />
-        <p>{props.title}</p>
+        <p className="flex items-center">{props.title}</p>
         <div className="icons">
           <img src={ChangeIcon} alt="change icon" onClick={onEdit} />
           <img

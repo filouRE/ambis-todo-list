@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .element {
-  @apply flex flex-row gap-3;
+  @apply flex flex-row gap-3 flex-wrap text-center justify-center;
 }
 .element img {
   @apply w-7;

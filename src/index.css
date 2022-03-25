@@ -27,3 +27,10 @@ img {
 input[type="text"] {
   font-size: 13px;
 }
+
+.invalid {
+  background-color: rgba(0, 0, 0, 0.65) !important;
+}
+.invalid-input {
+  outline-color: red !important;
+}
