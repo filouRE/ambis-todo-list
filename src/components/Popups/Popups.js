@@ -3,7 +3,7 @@ import "./style.css";
 import React, { useRef, useState } from "react";
 
 export function Popup(props) {
-  const [invalid, setinvalid] = useState(false);
+  const [invalid, setinvalid] = useState(true);
   const inputRef = useRef();
   const spanRef = useRef();
   const spanRef2 = useRef();
@@ -26,7 +26,7 @@ export function Popup(props) {
         <div className="inputs flex flex-col w-[86%]">
           <input
             onChange={() => {
-              if (inputRef.current.value.length > 25) {
+              if (inputRef.current.value.length > 18) {
                 setinvalid(true);
                 spanRef.current.classList.remove("hidden");
               } else if (inputRef.current.value.length === 0) {
@@ -55,6 +55,7 @@ export function Popup(props) {
             disabled={invalid}
             className={`add-button ${invalid ? "invalid" : ""}`}
             onClick={() => {
+              setinvalid(true);
               onAdd();
             }}
           >
@@ -63,6 +64,7 @@ export function Popup(props) {
           <button
             className="close-button"
             onClick={() => {
+              setinvalid(true);
               props.setTrigger(false);
               document.getElementsByClassName("content")[0].classList.remove("blur-sm");
             }}
@@ -76,22 +78,12 @@ export function Popup(props) {
     ""
   );
 }
+
 export function PopupTitle(props) {
-  const [invalid, setinvalid] = useState(false);
+  const [invalid, setinvalid] = useState(true);
   const inputRef = useRef();
   const spanRef = useRef();
   const spanRef2 = useRef();
-
-  const onAdd = () => {
-    const newtodo = {
-      id: inputRef.current.value,
-      title: inputRef.current.value,
-      complete: false,
-    };
-    props.pushTodos(newtodo);
-    props.setTrigger(false);
-    document.getElementsByClassName("content")[0].classList.remove("blur-sm");
-  };
 
   return props.trigger ? (
     <div className="popup">
@@ -129,7 +121,12 @@ export function PopupTitle(props) {
             disabled={invalid}
             className={`add-button ${invalid ? "invalid" : ""}`}
             onClick={() => {
-              onAdd();
+              setinvalid(true);
+              props.newTitle(inputRef.current.value);
+              localStorage.setItem("title", inputRef.current.value);
+
+              props.setTrigger(false);
+              document.getElementsByClassName("content")[0].classList.remove("blur-sm");
             }}
           >
             Add
@@ -137,6 +134,7 @@ export function PopupTitle(props) {
           <button
             className="close-button"
             onClick={() => {
+              setinvalid(true);
               props.setTrigger(false);
               document.getElementsByClassName("content")[0].classList.remove("blur-sm");
             }}
