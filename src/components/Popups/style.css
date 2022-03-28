@@ -13,9 +13,9 @@
     @apply flex justify-between gap-3;
   }
   .popup-inner .close-button {
-    @apply rounded py-1.5 bg-slate-900 text-white px-12;
+    @apply rounded py-1.5 bg-black text-white px-12;
   }
   .popup-inner .add-button {
-    @apply rounded py-1.5 bg-slate-900 text-white px-12;
+    @apply rounded py-1.5 bg-black text-white px-12;
   }
 }

@@ -10,7 +10,7 @@ export default memo(function Header({ children }) {
   return (
     <>
       <header className="header z-50">
-        <p>Ambi's todo list</p>
+        <a href="/">Ambi's todo list</a>
         {mobile ? <img alt="burger" src={Burger} /> : <nav>{children}</nav>}
       </header>
     </>

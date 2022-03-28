@@ -4,7 +4,13 @@
 
 @layer components {
   .content {
-    @apply relative h-[80vh];
+    @apply flex flex-col items-center justify-center gap-3  h-[80vh];
+  }
+  .top-content {
+    @apply flex flex-col gap-3;
+  }
+  .items {
+    @apply flex flex-col gap-1.5;
   }
   .new-item {
     @apply flex gap-2 text-lg font-bold bg-blue-500 p-2 rounded-md text-white;
@@ -14,28 +20,5 @@
   }
   img {
     @apply cursor-pointer;
-  }
-}
-
-@layer utilities {
-  .top-content {
-    height: 100px;
-    padding: 20px;
-
-    position: absolute;
-    top: 50%;
-    left: 53%;
-
-    margin: -70px 0 0 -170px;
-  }
-  .items {
-    width: 300px;
-    height: 100px;
-
-    position: absolute;
-    top: 65%;
-    left: 50%;
-
-    margin: -70px 0 0 -170px;
   }
 }
