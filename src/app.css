@@ -4,10 +4,7 @@
 
 @layer components {
   .content {
-    @apply flex flex-col items-center justify-center gap-3  h-[80vh];
-  }
-  .top-content {
-    @apply flex flex-col gap-3;
+    @apply flex justify-center items-center flex-col gap-3 min-h-[80vh];
   }
   .items {
     @apply flex flex-col gap-1.5;

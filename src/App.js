@@ -75,30 +75,28 @@ function App() {
       </Popup>
 
       <div className="content" ref={titleRef}>
-        <div className="top-content">
-          <div className="title flex justify-center text-3xl gap-2">
-            <h1 className="text-center font-bold ">{title}</h1>
-            <img
-              src={ModifyIcon}
-              alt="modify icon"
-              className="w-4"
-              onClick={() => {
-                setButtonPupopTitle(true);
-                document.getElementsByClassName("content")[0].classList.add("blur-sm");
-              }}
-            />
-          </div>
-          <div
-            ref={newItemRef}
-            className="new-item cursor-pointer"
+        <div className="title flex justify-center text-3xl gap-2">
+          <h1 className="text-center font-bold ">{title}</h1>
+          <img
+            src={ModifyIcon}
+            alt="modify icon"
+            className="w-4"
             onClick={() => {
-              setButtonPupop(true);
+              setButtonPupopTitle(true);
               document.getElementsByClassName("content")[0].classList.add("blur-sm");
             }}
-          >
-            <p>Add a new item</p>
-            <img src={AddIcon} alt="check icon" />
-          </div>
+          />
+        </div>
+        <div
+          ref={newItemRef}
+          className="new-item cursor-pointer"
+          onClick={() => {
+            setButtonPupop(true);
+            document.getElementsByClassName("content")[0].classList.add("blur-sm");
+          }}
+        >
+          <p>Add a new item</p>
+          <img src={AddIcon} alt="check icon" />
         </div>
         <div className="items">
           {" "}
