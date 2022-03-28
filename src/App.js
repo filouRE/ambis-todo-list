@@ -1,5 +1,5 @@
 // Linking
-import "./App.css";
+import "./app.css";
 // Imports
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
