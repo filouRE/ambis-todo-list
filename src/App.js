@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { Popup, PopupTitle } from "./components/Popups/Popups";
+import { Popup, PopupTitle, PopupDelete } from "./components/Popups/Popups";
 // Images
 import AddIcon from "./assets/Add.svg";
 import Todos from "./components/Todos/Todos";
@@ -99,7 +99,6 @@ function App() {
           <img src={AddIcon} alt="check icon" />
         </div>
         <div className="items">
-          {" "}
           {todos.map((todo) => (
             <Todos key={todo.id} title={todo.title} delete={onDelete} />
           ))}

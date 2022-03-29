@@ -1,6 +1,8 @@
 // Linking
 import "./style.css";
-import React from "react";
+import React, { useState } from "react";
+import { PopupDelete } from "./../Popups/Popups";
+
 // Images
 import CheckIcon from "../../assets/Check.svg";
 import UncheckIcon from "../../assets/Uncheck.svg";
@@ -9,9 +11,12 @@ import DeleteIcon from "../../assets/Delete.svg";
 
 function Todos(props) {
   const onEdit = () => {};
-
+  const [buttonPopupDelete, setButtonPupopDelete] = useState(false);
+  const calice = props.title;
   return (
     <>
+      <PopupDelete delete={calice} trigger={buttonPopupDelete} setTrigger={setButtonPupopDelete}></PopupDelete>
+
       <div className="element">
         <img src={CheckIcon} alt="check icon" />
         <p className="flex items-center">{props.title}</p>
@@ -21,7 +26,7 @@ function Todos(props) {
             src={DeleteIcon}
             alt="delete icon"
             onClick={() => {
-              props.delete(props.title);
+              setButtonPupopDelete(true);
             }}
           />
         </div>

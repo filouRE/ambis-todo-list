@@ -148,3 +148,35 @@ export function PopupTitle(props) {
     ""
   );
 }
+
+export function PopupDelete(props) {
+  return props.trigger ? (
+    <div className="popup-delete">
+      <div className="popup-inner">
+        <h3>Are you sure you want to delete?</h3>
+        <div className="buttons">
+          <button
+            className="remove-button"
+            onClick={() => {
+              props.setTrigger(false);
+              document.getElementsByClassName("content")[0].classList.remove("blur-sm");
+            }}
+          >
+            Remove
+          </button>
+          <button
+            className="close-button"
+            onClick={() => {
+              props.setTrigger(false);
+              document.getElementsByClassName("content")[0].classList.remove("blur-sm");
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
