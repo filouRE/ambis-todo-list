@@ -12,6 +12,14 @@ import Todos from "./components/Todos/Todos";
 import ModifyIcon from "./assets/Modify.svg";
 
 function App() {
+  if (!localStorage.getItem("todos")) {
+    localStorage.setItem("todos", JSON.stringify([]));
+  }
+
+  if (!localStorage.getItem("title")) {
+    localStorage.setItem("title", "Things todo today");
+  }
+
   const [buttonPopup, setButtonPupop] = useState(false);
   const [buttonPopupTitle, setButtonPupopTitle] = useState(false);
 
@@ -20,14 +28,6 @@ function App() {
 
   const titleRef = useRef();
   const newItemRef = useRef();
-
-  if (!localStorage.getItem("todos")) {
-    localStorage.setItem("todos", JSON.stringify([]));
-  }
-
-  if (!localStorage.getItem("title")) {
-    localStorage.setItem("title", "Things todo today");
-  }
 
   const pushTodos = (newTodo) => {
     localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
@@ -100,7 +100,7 @@ function App() {
         </div>
         <div className="items">
           {todos.map((todo) => (
-            <Todos key={todo.id} title={todo.title} delete={onDelete} />
+            <Todos className={todo.title} key={todo.id} title={todo.title} state={todo.complete} delete={onDelete} />
           ))}
         </div>
       </div>
