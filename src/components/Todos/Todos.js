@@ -12,7 +12,7 @@ import DeleteIcon from "../../assets/Delete.svg";
 function Todos(props) {
   const onEdit = () => {};
   const [buttonPopupDelete, setButtonPupopDelete] = useState(false);
-  const [buttonValid, setbuttonValid] = useState(true);
+  const [buttonValid, setbuttonValid] = useState(props.complete);
 
   return (
     <>
@@ -39,16 +39,14 @@ function Todos(props) {
           </button>
         </div>
       </PopupDelete>
-
       <div className="element">
         <img
-          src={buttonValid ? CheckIcon : UncheckIcon}
+          src={buttonValid ? UncheckIcon : CheckIcon}
           alt="check icon"
-          onClick={() => {
+          id={props.id}
+          onClick={(event) => {
             setbuttonValid(!buttonValid);
-            if (buttonValid) {
-              console.log(document.activeElement.tagName);
-            }
+            props.onChange(event);
           }}
         />
         <p className="flex items-center">{props.title}</p>

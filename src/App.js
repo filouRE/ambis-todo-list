@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { Popup, PopupTitle, PopupDelete } from "./components/Popups/Popups";
+import { Popup, PopupTitle } from "./components/Popups/Popups";
 // Images
 import AddIcon from "./assets/Add.svg";
 import Todos from "./components/Todos/Todos";
@@ -34,6 +34,20 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
+  const onChange = (event) => {
+    let todoItem = todos;
+    const state = !todoItem[index].complete;
+
+    const index = todoItem.findIndex((currentElement) => {
+      return currentElement.id === event.target.id;
+    });
+
+    todoItem[index].complete = state;
+
+    localStorage.setItem("todos", JSON.stringify(todoItem));
+    setTodos(todoItem);
+  };
+
   const onDelete = (id) => {
     const filteredTodos = todos.filter((x) => x.title !== id);
     localStorage.setItem("todos", JSON.stringify([...filteredTodos]));
@@ -58,7 +72,7 @@ function App() {
       ease: "elastic",
     });
   }, []);
-
+  console.log(todos);
   return (
     <>
       <Header>
@@ -100,7 +114,7 @@ function App() {
         </div>
         <div className="items">
           {todos.map((todo) => (
-            <Todos className={todo.title} key={todo.id} title={todo.title} state={todo.complete} delete={onDelete} />
+            <Todos className={todo.title} id={todo.findIndex} key={todo.id} title={todo.title} state={todo.complete} delete={onDelete} onChange={onChange} complete={todo.complete} />
           ))}
         </div>
       </div>
