@@ -1,7 +1,7 @@
 // Linking
 import "./style.css";
-import React, { useState } from "react";
-import { PopupDelete } from "./../Popups/Popups";
+import React, { useState, useRef } from "react";
+import { PopupDelete, PopupModify } from "./../Popups/Popups";
 
 // Images
 import CheckIcon from "../../assets/Check.svg";
@@ -10,12 +10,34 @@ import ChangeIcon from "../../assets/Change.svg";
 import DeleteIcon from "../../assets/Delete.svg";
 
 function Todos(props) {
-  const onEdit = () => {};
   const [buttonPopupDelete, setButtonPupopDelete] = useState(false);
   const [buttonValid, setbuttonValid] = useState(props.complete);
+  const [buttonPopupModified, setButtonPopupModified] = useState(false);
+
+  const modifyInputRef = useRef();
+
+  //const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
+
+  const onModify = () => {
+    let todoItem = props.todos;
+
+    const inputVal = modifyInputRef.current.value;
+    console.log(inputVal);
+
+    const index = todoItem.findIndex((currentElement) => {
+      return currentElement.id === props.id;
+    });
+
+    todoItem[index].id = inputVal;
+    todoItem[index].title = inputVal;
+
+    localStorage.setItem("todos", JSON.stringify(todoItem));
+    props.setTodos(todoItem);
+  };
 
   return (
     <>
+      <PopupModify trigger={buttonPopupModified} setTrigger={setButtonPopupModified} inputRef={modifyInputRef} onModify={onModify} />
       <PopupDelete trigger={buttonPopupDelete} setTrigger={setButtonPupopDelete}>
         <div className="buttons">
           <button
@@ -51,7 +73,13 @@ function Todos(props) {
         />
         <p className="flex items-center">{props.title}</p>
         <div className="icons">
-          <img src={ChangeIcon} alt="change icon" onClick={onEdit} />
+          <img
+            src={ChangeIcon}
+            alt="change icon"
+            onClick={() => {
+              setButtonPopupModified(true);
+            }}
+          />
           <img
             src={DeleteIcon}
             alt="delete icon"

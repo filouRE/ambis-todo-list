@@ -6,6 +6,9 @@
   .popup-delete {
     @apply flex justify-center items-center flex-col min-h-[92vh] min-w-full bg-slate-800/5 absolute right-0 top-0 z-50;
   }
+  .popup-modified {
+    @apply flex justify-center items-center flex-col min-h-[92vh] min-w-full bg-slate-800/5 absolute right-0 top-0 z-50;
+  }
   .popup {
     @apply flex justify-center items-center flex-col min-h-[92vh] min-w-full bg-slate-800/5 fixed z-50 pb-6;
   }
@@ -15,7 +18,6 @@
   .buttons {
     @apply flex justify-between gap-3;
   }
-
   .popup-inner h3 {
     @apply text-lg font-bold;
   }
@@ -27,5 +29,9 @@
   }
   .popup-inner .remove-button {
     @apply rounded py-1.5 bg-red-600 text-white px-8;
+  }
+
+  .popup-modified .blue-btn {
+    @apply rounded py-1.5 bg-blue-600 text-white px-12;
   }
 }

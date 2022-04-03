@@ -10,6 +10,7 @@ import { Popup, PopupTitle } from "./components/Popups/Popups";
 import AddIcon from "./assets/Add.svg";
 import Todos from "./components/Todos/Todos";
 import ModifyIcon from "./assets/Modify.svg";
+import { PopupModify } from "./components/Popups/Popups";
 
 function App() {
   if (!localStorage.getItem("todos")) {
@@ -114,7 +115,7 @@ function App() {
         </div>
         <div className="items">
           {todos.map((todo) => (
-            <Todos className={todo.title} id={todo.findIndex} key={todo.id} title={todo.title} state={todo.complete} delete={onDelete} onChange={onChange} complete={todo.complete} />
+            <Todos className={todo.title} id={todo.id} key={todo.id} setTodos={setTodos} todos={todos} title={todo.title} state={todo.complete} delete={onDelete} onChange={onChange} complete={todo.complete} />
           ))}
         </div>
       </div>
