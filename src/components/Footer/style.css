@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .footer {
+    @apply w-full flex flex-col justify-end  text-sm text-center min-h-[5vh];
+  }
+}

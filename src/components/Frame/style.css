@@ -5,6 +5,8 @@
 @layer components {
   .Frame {
     @apply z-[70] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed;
-    @apply bg-white p-6 rounded-lg;
+  }
+  .popup {
+    @apply flex justify-center items-center flex-col bg-slate-800/5 z-50;
   }
 }

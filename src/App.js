@@ -1,4 +1,4 @@
-import "./App.css";
+import "./app.css";
 
 import { useState, useEffect } from "react";
 
@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import TitleFrame from "./components/TitleFrame";
 import NewItemFrame from "./components/NewItemFrame";
 import Todo from "./components/Todo";
+import Footer from "./components/Footer/Footer";
 
 export default function App() {
   const [title, setTitle] = useState("");
@@ -17,15 +18,11 @@ export default function App() {
 
   useEffect(() => {
     if (!localStorage.getItem("title")) {
-      localStorage.setItem("title", "Todo title");
+      localStorage.setItem("title", "Things todo today");
       localStorage.setItem("todos", JSON.stringify([]));
     }
     setTitle(localStorage.getItem("title"));
-    setTodos(
-      localStorage.getItem("todos")
-        ? JSON.parse(localStorage.getItem("todos"))
-        : []
-    );
+    setTodos(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
   }, []);
 
   const onSetTitle = (newTitle) => {
@@ -36,10 +33,7 @@ export default function App() {
 
   const onAddItem = (item) => {
     setTodos((old) => {
-      localStorage.setItem(
-        "todos",
-        old.length ? JSON.stringify([...old, item]) : JSON.stringify([item])
-      );
+      localStorage.setItem("todos", old.length ? JSON.stringify([...old, item]) : JSON.stringify([item]));
       return old.length ? [...old, item] : [item];
     });
     setOverlay();
@@ -62,34 +56,17 @@ export default function App() {
       <div className="content">
         <div className="title flex justify-center text-3xl gap-2">
           <h1 className="text-center font-bold ">{title}</h1>
-          <img
-            src={ModifyIcon}
-            alt="modify icon"
-            className="w-4"
-            onClick={() => titlePopup()}
-          />
+          <img src={ModifyIcon} alt="modify icon" className="w-4" onClick={() => titlePopup()} />
         </div>
         <div className="new-item cursor-pointer" onClick={() => addItemPopup()}>
           <p>Add a new item</p>
           <img src={AddIcon} alt="check icon" />
         </div>
 
-        <div className="items">
-          {todos.length ? (
-            todos.map((todo) => (
-              <Todo
-                {...todo}
-                list={todos}
-                setList={setTodos}
-                setOverlay={setOverlay}
-              />
-            ))
-          ) : (
-            <p>No todos</p>
-          )}
-        </div>
+        <div className="items">{todos.length ? todos.map((todo) => <Todo {...todo} list={todos} key={todo.id} setList={setTodos} setOverlay={setOverlay} />) : <p>No items added</p>}</div>
       </div>
 
+      <Footer></Footer>
       {overlay && (
         <>
           <div className="overlay" onClick={() => setOverlay()}></div>

@@ -32,22 +32,10 @@ export default function Todo({ id, title, done, list, setList, setOverlay }) {
 
   return (
     <div className="todo" id={id}>
-      <img
-        src={done ? UncheckIcon : CheckIcon}
-        alt="check icon"
-        onClick={onDoneChange}
-      />
-      <p className="flex items-center">{title}</p>
+      <img src={done ? UncheckIcon : CheckIcon} alt="check icon" onClick={onDoneChange} />
+      <p className={`flex items-center ${done ? "line-through" : ""}`}>{title}</p>
       <div className="icons">
-        <img
-          src={ChangeIcon}
-          alt="change icon"
-          onClick={() =>
-            setOverlay(
-              <UpdateTodoFrame updateItem={onUpdate} setOverlay={setOverlay} />
-            )
-          }
-        />
+        <img src={ChangeIcon} alt="change icon" onClick={() => setOverlay(<UpdateTodoFrame updateItem={onUpdate} setOverlay={setOverlay} />)} />
         <img src={DeleteIcon} alt="delete icon" onClick={onDelete} />
       </div>
     </div>
