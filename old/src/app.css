@@ -15,11 +15,6 @@
   .new-item img {
     @apply w-6;
   }
-
-  .overlay {
-    @apply absolute z-[50] bg-gray-400 bg-opacity-90 top-0 w-full h-full;
-  }
-
   img {
     @apply cursor-pointer;
   }

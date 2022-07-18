@@ -1,7 +1,7 @@
 // Linking
 import "./style.css";
 import React, { useState, useRef } from "react";
-import { PopupDelete, PopupModify } from "./../Popups/Popups";
+import { PopupDelete, PopupModify } from "../Popups/Popups";
 
 // Images
 import CheckIcon from "../../assets/Check.svg";

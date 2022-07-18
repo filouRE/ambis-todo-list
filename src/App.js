@@ -1,129 +1,101 @@
-// Linking
-import "./app.css";
-// Imports
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import { Popup, PopupTitle } from "./components/Popups/Popups";
-// Images
+import "./App.css";
+
+import { useState, useEffect } from "react";
+
 import AddIcon from "./assets/Add.svg";
-import Todos from "./components/Todos/Todos";
 import ModifyIcon from "./assets/Modify.svg";
-import { PopupModify } from "./components/Popups/Popups";
 
-function App() {
-  if (!localStorage.getItem("todos")) {
-    localStorage.setItem("todos", JSON.stringify([]));
-  }
+import Header from "./components/Header";
+import TitleFrame from "./components/TitleFrame";
+import NewItemFrame from "./components/NewItemFrame";
+import Todo from "./components/Todo";
 
-  if (!localStorage.getItem("title")) {
-    localStorage.setItem("title", "Things todo today");
-  }
-
-  const [buttonPopup, setButtonPupop] = useState(false);
-  const [buttonPopupTitle, setButtonPupopTitle] = useState(false);
-
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
-  const [title, setTitle] = useState(localStorage.getItem("title"));
-
-  const titleRef = useRef();
-  const newItemRef = useRef();
-
-  const pushTodos = (newTodo) => {
-    localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
-    setTodos([...todos, newTodo]);
-  };
-
-  const onChange = (event) => {
-    let todoItem = todos;
-    const state = !todoItem[index].complete;
-
-    const index = todoItem.findIndex((currentElement) => {
-      return currentElement.id === event.target.id;
-    });
-
-    todoItem[index].complete = state;
-
-    localStorage.setItem("todos", JSON.stringify(todoItem));
-    setTodos(todoItem);
-    
-    console.log(todoItem);
-  };
-
-  const onDelete = (id) => {
-    const filteredTodos = todos.filter((x) => x.title !== id);
-    localStorage.setItem("todos", JSON.stringify([...filteredTodos]));
-    setTodos(filteredTodos);
-  };
+export default function App() {
+  const [title, setTitle] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [overlay, setOverlay] = useState();
 
   useEffect(() => {
-    // localStorage.getItem("todos");
-
-    const speed = 1.2;
-    gsap.from(titleRef.current, {
-      y: -30,
-      duration: speed,
-      scale: 1,
-      ease: "elastic",
-      opacity: 0.6,
-    });
-    gsap.from(newItemRef.current, {
-      x: -40,
-      duration: speed,
-      scale: 1,
-      ease: "elastic",
-    });
+    if (!localStorage.getItem("title")) {
+      localStorage.setItem("title", "Todo title");
+      localStorage.setItem("todos", JSON.stringify([]));
+    }
+    setTitle(localStorage.getItem("title"));
+    setTodos(
+      localStorage.getItem("todos")
+        ? JSON.parse(localStorage.getItem("todos"))
+        : []
+    );
   }, []);
-  console.log(todos);
+
+  const onSetTitle = (newTitle) => {
+    localStorage.setItem("title", newTitle);
+    setTitle(newTitle);
+    setOverlay();
+  };
+
+  const onAddItem = (item) => {
+    setTodos((old) => {
+      localStorage.setItem(
+        "todos",
+        old.length ? JSON.stringify([...old, item]) : JSON.stringify([item])
+      );
+      return old.length ? [...old, item] : [item];
+    });
+    setOverlay();
+  };
+
+  const titlePopup = () => {
+    setOverlay(<TitleFrame setTitle={onSetTitle} setOverlay={setOverlay} />);
+  };
+
+  const addItemPopup = () => {
+    setOverlay(<NewItemFrame addItem={onAddItem} setOverlay={setOverlay} />);
+  };
+
   return (
     <>
       <Header>
-        <a href="mailto:felix@seku.tech" className="font-medium">
-          CONTACT
-        </a>
+        <p>Contact</p>
       </Header>
 
-      <PopupTitle trigger={buttonPopupTitle} setTrigger={setButtonPupopTitle} newTitle={setTitle} />
-
-      <Popup trigger={buttonPopup} setTrigger={setButtonPupop} pushTodos={pushTodos}>
-        <h3>Create a new task</h3>
-        <p>Enter the name of the tasks please!</p>
-      </Popup>
-
-      <div className="content" ref={titleRef}>
+      <div className="content">
         <div className="title flex justify-center text-3xl gap-2">
           <h1 className="text-center font-bold ">{title}</h1>
           <img
             src={ModifyIcon}
             alt="modify icon"
             className="w-4"
-            onClick={() => {
-              setButtonPupopTitle(true);
-              document.getElementsByClassName("content")[0].classList.add("blur-sm");
-            }}
+            onClick={() => titlePopup()}
           />
         </div>
-        <div
-          ref={newItemRef}
-          className="new-item cursor-pointer"
-          onClick={() => {
-            setButtonPupop(true);
-            document.getElementsByClassName("content")[0].classList.add("blur-sm");
-          }}
-        >
+        <div className="new-item cursor-pointer" onClick={() => addItemPopup()}>
           <p>Add a new item</p>
           <img src={AddIcon} alt="check icon" />
         </div>
+
         <div className="items">
-          {todos.map((todo) => (
-            <Todos className={todo.title} id={todo.id} key={todo.id} setTodos={setTodos} todos={todos} title={todo.title} state={todo.complete} delete={onDelete} onChange={onChange} complete={todo.complete} />
-          ))}
+          {todos.length ? (
+            todos.map((todo) => (
+              <Todo
+                {...todo}
+                list={todos}
+                setList={setTodos}
+                setOverlay={setOverlay}
+              />
+            ))
+          ) : (
+            <p>No todos</p>
+          )}
         </div>
       </div>
-      <Footer />
+
+      {overlay && (
+        <>
+          <div className="overlay" onClick={() => setOverlay()}></div>
+          {overlay}
+        </>
+      )}
     </>
   );
 }
-
-export default App;
