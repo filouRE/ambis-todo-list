@@ -8,7 +8,7 @@ import ModifyIcon from "./assets/Modify.svg";
 import Header from "./components/Header";
 import TitleFrame from "./components/TitleFrame";
 import NewItemFrame from "./components/NewItemFrame";
-import { Todo } from "./components/Todo";
+import Todo from "./components/Todo";
 
 function App() {
   const [title, setTitle] = useState("");
