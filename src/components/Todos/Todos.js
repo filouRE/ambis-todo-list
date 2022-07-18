@@ -33,19 +33,31 @@ function Todos(props) {
 
     localStorage.setItem("todos", JSON.stringify(todoItem));
     props.setTodos(todoItem);
+
+    props.onChange({ target: { id: todoItem.title } });
   };
 
   return (
     <>
-      <PopupModify trigger={buttonPopupModified} setTrigger={setButtonPopupModified} inputRef={modifyInputRef} onModify={onModify} />
-      <PopupDelete trigger={buttonPopupDelete} setTrigger={setButtonPupopDelete}>
+      <PopupModify
+        trigger={buttonPopupModified}
+        setTrigger={setButtonPopupModified}
+        inputRef={modifyInputRef}
+        onModify={onModify}
+      />
+      <PopupDelete
+        trigger={buttonPopupDelete}
+        setTrigger={setButtonPupopDelete}
+      >
         <div className="buttons">
           <button
             className="remove-button"
             onClick={() => {
               props.delete(props.title);
               setButtonPupopDelete(false);
-              document.getElementsByClassName("content")[0].classList.remove("blur-sm");
+              document
+                .getElementsByClassName("content")[0]
+                .classList.remove("blur-sm");
             }}
           >
             Remove
@@ -54,7 +66,9 @@ function Todos(props) {
             className="close-button"
             onClick={() => {
               setButtonPupopDelete(false);
-              document.getElementsByClassName("content")[0].classList.remove("blur-sm");
+              document
+                .getElementsByClassName("content")[0]
+                .classList.remove("blur-sm");
             }}
           >
             Close

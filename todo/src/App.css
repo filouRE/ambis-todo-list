@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .content {
+    @apply flex justify-center items-center flex-col gap-3 min-h-[80vh];
+  }
+  .items {
+    @apply flex flex-col gap-1.5;
+  }
+  .new-item {
+    @apply flex gap-2 text-lg font-bold bg-blue-500 p-2 rounded-md text-white;
+  }
+  .new-item img {
+    @apply w-6;
+  }
+
+  .overlay {
+    @apply absolute z-[50] bg-gray-400 bg-opacity-90 top-0 w-full h-full;
+  }
+
+  img {
+    @apply cursor-pointer;
+  }
+}

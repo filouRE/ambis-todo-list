@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .header {
+    @apply w-full flex justify-between items-center px-8 py-4 h-[8vh];
+  }
+  .header a {
+    @apply text-xl;
+  }
+  .header img {
+    @apply w-7;
+  }
+}

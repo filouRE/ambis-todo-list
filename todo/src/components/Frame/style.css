@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .Frame {
+    @apply z-[70] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed;
+    @apply bg-white p-6 rounded-lg;
+  }
+}

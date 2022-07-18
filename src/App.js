@@ -47,6 +47,8 @@ function App() {
 
     localStorage.setItem("todos", JSON.stringify(todoItem));
     setTodos(todoItem);
+    
+    console.log(todoItem);
   };
 
   const onDelete = (id) => {
